@@ -4,3 +4,4 @@ docker
 redis
 rq
 mariadb
+gevent
