@@ -37,7 +37,7 @@ def start_judgement_docker(**kwargs):
         #            print(line)
         env = ["MAIN_CLASS=" + target_launchname, "TEST_INPUT=" + kwargs['io_order']['input']]
         print(env)
-        output = client.containers.run(image, auto_remove=False, environment=env, stdout=True, stderr=True)
+        output = client.containers.run(image, auto_remove=True, environment=env, stdout=True, stderr=True)
 
         print("Got this: ", output.decode('UTF-8').strip())
         print("expected: ", kwargs['io_order']['output'])
