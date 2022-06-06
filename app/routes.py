@@ -5,7 +5,7 @@ from rq.job import Job
 
 bp = Blueprint("job", __name__)
 
-redis = Redis(host='192.168.50.87', port=6380)
+redis = Redis()
 rqueue = Queue(connection=redis)
 
 @bp.route('/job', methods=['POST'])
