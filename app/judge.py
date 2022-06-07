@@ -16,7 +16,18 @@ def report_success(job, connection, result, *args, **kwargs):
     db.session.commit()
 
 def report_failure(job, connection, type, value, traceback):
-    print(traceback)
+    #print(traceback)
+    from app import create_app, db
+
+    app = create_app()
+    app.app_context().push()
+
+    job_kwargs = job.kwargs
+
+    test_result = TestResult(job_kwargs['judge_order']['assignment_id'], job_kwargs['io_order']['id'], False, 'Judge exec error (build and compile)')
+
+    db.session.add(test_result)
+    db.session.commit()
 
 def start_judgement_docker(**kwargs):
     client = docker.DockerClient(base_url='unix://var/run/docker.sock')
